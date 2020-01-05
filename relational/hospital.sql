@@ -78,3 +78,19 @@ CREATE TABLE Hospitalization (
         FOREIGN KEY (RoomID)
         REFERENCES Room(ID)
 );
+
+CREATE TABLE Observation (
+    ID INTEGER PRIMARY KEY,
+    NurseId INTEGER NOT NULL,
+    HospitalizationId INTEGER NOT NULL,
+    Description VARCHAR2(500) NOT NULL,
+    DateTime DATE NOT NULL
+
+    CONSTRAINT FK_Nurse
+        FOREIGN KEY (NurseId)
+        REFERENCES Nurse(ID)
+
+    CONSTRAINT FK_Hospitalization
+        FOREIGN KEY (HospitalizationId)
+        REFERENCES Hospitalization(ID)
+);
