@@ -8,11 +8,16 @@ CREATE TABLE Person (
 
 CREATE TABLE Employee (
     ID INTEGER PRIMARY KEY,
+    FloorId INTEGER NOT NULL,
     WorksNightShift NUMBER(1) NOT NULL
 
     CONSTRAINT FK_Person
         FOREIGN KEY (ID)
         REFERENCES Person(ID)
+
+    CONSTRAINT FK_Floor
+        FOREIGN KEY (FloorId)
+        REFERENCES Floor(ID)
 );
 
 CREATE TABLE Doctor (
@@ -42,9 +47,19 @@ CREATE TABLE Patient (
         REFERENCES Person(ID)
 );
 
+CREATE TABLE Floor (
+    ID INTEGER PRIMARY KEY,
+    Name VARCHAR2(30) NOT NULL
+);
+
 CREATE TABLE Room (
     ID INTEGER PRIMARY KEY,
+    FloorID INTEGER NOT NULL,
     Capacity INTEGER NOT NULL
+
+    CONSTRAINT FK_Plant
+        FOREIGN KEY (FloorID)
+        REFERENCES Floor(ID)
 );
 
 CREATE TABLE Hospitalization (
