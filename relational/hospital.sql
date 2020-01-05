@@ -125,3 +125,26 @@ CREATE TABLE Patient_Patologies (
         FOREIGN KEY (PatologyId)
         REFERENCES Patology(ID)
 );
+
+CREATE TABLE Treatment (
+    ID INTEGER PRIMARY KEY,
+    DoctorId INTEGER NOT NULL,
+    HospitalizationId INTEGER NOT NULL,
+    MedicamentId INTEGER,
+    DateTime Date NOT NULL,
+    Description VARCHAR2(500) NOT NULL,
+    StartDate Date NOT NULL,
+    EndDate DATE NOT NULL
+
+    CONSTRAINT FK_Doctor
+        FOREIGN KEY (DoctorId)
+        REFERENCES Doctor(ID)
+
+    CONSTRAINT FK_Medicament
+        FOREIGN KEY (MedicamentId)
+        REFERENCES Medicament(ID)
+
+    CONSTRAINT FK_Hospitalization
+        FOREIGN KEY (HospitalizationId)
+        REFERENCES Hospitalization(ID)
+);
