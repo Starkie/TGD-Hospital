@@ -94,3 +94,34 @@ CREATE TABLE Observation (
         FOREIGN KEY (HospitalizationId)
         REFERENCES Hospitalization(ID)
 );
+
+CREATE TABLE Medicament (
+    ID INTEGER PRIMARY KEY,
+    Name VARCHAR2(30) NOT NULL,
+    CieCode VARCHAR2(30) NOT NULL
+);
+
+CREATE TABLE Patology (
+    ID INTEGER PRIMARY KEY,
+    MedicamentId INTEGER,
+    Name VARCHAR2(30) NOT NULL,
+    IsInfectious NUMBER(1) NOT NULL,
+    IsHereditary NUMBER(1) NOT NULL
+
+    CONSTRAINT FK_Medicament
+        FOREIGN KEY (MedicamentId)
+        REFERENCES Medicament(ID)
+);
+
+CREATE TABLE Patient_Patologies (
+    PatientId INTEGER PRIMARY KEY,
+    PatologyId INTEGER PRIMARY KEY
+
+    CONSTRAINT FK_Patient
+        FOREIGN KEY (PatientId)
+        REFERENCES Patient(ID)
+
+    CONSTRAINT FK_Patology
+        FOREIGN KEY (PatologyId)
+        REFERENCES Patology(ID)
+);
