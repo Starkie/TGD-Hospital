@@ -7,7 +7,7 @@ CREATE TABLE Person (
 );
 
 CREATE TABLE Employee (
-    ID INTEGER PRIMARY KEY
+    ID INTEGER PRIMARY KEY,
     WorksNightShift NUMBER(1) NOT NULL
 
     CONSTRAINT FK_Person
@@ -15,8 +15,26 @@ CREATE TABLE Employee (
         REFERENCES Person(ID)
 );
 
+CREATE TABLE Doctor (
+    ID INTEGER PRIMARY KEY,
+    ColegiateNumber VARCHAR2(15) NOT NULL
+
+    CONSTRAINT FK_Employee
+        FOREIGN KEY (ID)
+        REFERENCES Employee(ID)
+);
+
+CREATE TABLE Nurse (
+    ID INTEGER PRIMARY KEY,
+    IsSupervisor NUMBER(1) NOT NULL
+
+    CONSTRAINT FK_Employee
+        FOREIGN KEY (ID)
+        REFERENCES Employee(ID)
+);
+
 CREATE TABLE Patient (
-    ID INTEGER PRIMARY KEY
+    ID INTEGER PRIMARY KEY,
     SipNumber VARCHAR2(15) NOT NULL
 
     CONSTRAINT FK_Person
