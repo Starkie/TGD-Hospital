@@ -1,0 +1,7 @@
+CREATE TABLE Person (
+    ID INTEGER PRIMARY KEY, 
+    DNI VARCHAR2(12) NOT NULL,
+    Name VARCHAR2(25) NOT NULL,
+    FirstSurname VARCHAR2(25) NOT NULL,
+    SecondSurname VARCHAR2(25)
+);
