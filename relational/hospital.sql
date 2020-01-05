@@ -41,3 +41,25 @@ CREATE TABLE Patient (
         FOREIGN KEY (ID)
         REFERENCES Person(ID)
 );
+
+CREATE TABLE Room (
+    ID INTEGER PRIMARY KEY,
+    Capacity INTEGER NOT NULL
+);
+
+CREATE TABLE Hospitalization (
+    ID INTEGER PRIMARY KEY,
+    PatientID INTEGER NOT NULL,
+    RoomID INTEGER NOT NULL,
+    DerivedFromEmergencies NUMBER(1) NOT NULL,
+    AdmissionDate Date NOT NULL, 
+    DischargeDate Date
+
+    CONSTRAINT FK_Patient
+        FOREIGN KEY (PatientID)
+        REFERENCES Patient(ID)
+
+    CONSTRAINT FK_Room
+        FOREIGN KEY (RoomID)
+        REFERENCES Room(ID)
+);
