@@ -116,8 +116,11 @@ CREATE SCHEMA AUTHORIZATION hospital
     )
 
     CREATE TABLE hospital.Patient_Patologies (
-        PatientId INTEGER PRIMARY KEY,
-        PatologyId INTEGER PRIMARY KEY,
+        PatientId INTEGER,
+        PatologyId INTEGER,
+
+        CONSTRAINT PK_PatientPatologies
+            PRIMARY KEY (PatientId, PatologyId),
 
         CONSTRAINT FK_PatientPatologies_Patient
             FOREIGN KEY (PatientId)
