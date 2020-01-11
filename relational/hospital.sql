@@ -1,150 +1,152 @@
-CREATE TABLE Person (
-    ID INTEGER PRIMARY KEY, 
-    DNI VARCHAR2(12) NOT NULL,
-    Name VARCHAR2(25) NOT NULL,
-    FirstSurname VARCHAR2(25) NOT NULL,
-    SecondSurname VARCHAR2(25)
-);
+CREATE SCHEMA AUTHORIZATION hospital
 
-CREATE TABLE Employee (
-    ID INTEGER PRIMARY KEY,
-    FloorId INTEGER NOT NULL,
-    WorksNightShift NUMBER(1) NOT NULL
+    CREATE TABLE hospital.Person (
+        ID INTEGER PRIMARY KEY, 
+        DNI VARCHAR2(12) NOT NULL,
+        Name VARCHAR2(25) NOT NULL,
+        FirstSurname VARCHAR2(25) NOT NULL,
+        SecondSurname VARCHAR2(25)
+    )
 
-    CONSTRAINT FK_Person
-        FOREIGN KEY (ID)
-        REFERENCES Person(ID)
+    CREATE TABLE hospital.Employee (
+        ID INTEGER PRIMARY KEY,
+        FloorId INTEGER NOT NULL,
+        WorksNightShift NUMBER(1) NOT NULL
 
-    CONSTRAINT FK_Floor
-        FOREIGN KEY (FloorId)
-        REFERENCES Floor(ID)
-);
+        CONSTRAINT FK_Person
+            FOREIGN KEY (ID)
+            REFERENCES Person(ID)
 
-CREATE TABLE Doctor (
-    ID INTEGER PRIMARY KEY,
-    ColegiateNumber VARCHAR2(15) NOT NULL
+        CONSTRAINT FK_Floor
+            FOREIGN KEY (FloorId)
+            REFERENCES Floor(ID)
+    )
 
-    CONSTRAINT FK_Employee
-        FOREIGN KEY (ID)
-        REFERENCES Employee(ID)
-);
+    CREATE TABLE hospital.Doctor (
+        ID INTEGER PRIMARY KEY,
+        ColegiateNumber VARCHAR2(15) NOT NULL
 
-CREATE TABLE Nurse (
-    ID INTEGER PRIMARY KEY,
-    IsSupervisor NUMBER(1) NOT NULL
+        CONSTRAINT FK_Employee
+            FOREIGN KEY (ID)
+            REFERENCES Employee(ID)
+    )
 
-    CONSTRAINT FK_Employee
-        FOREIGN KEY (ID)
-        REFERENCES Employee(ID)
-);
+    CREATE TABLE hospital.Nurse (
+        ID INTEGER PRIMARY KEY,
+        IsSupervisor NUMBER(1) NOT NULL
 
-CREATE TABLE Patient (
-    ID INTEGER PRIMARY KEY,
-    SipNumber VARCHAR2(15) NOT NULL
+        CONSTRAINT FK_Employee
+            FOREIGN KEY (ID)
+            REFERENCES Employee(ID)
+    )
 
-    CONSTRAINT FK_Person
-        FOREIGN KEY (ID)
-        REFERENCES Person(ID)
-);
+    CREATE TABLE hospital.Patient (
+        ID INTEGER PRIMARY KEY,
+        SipNumber VARCHAR2(15) NOT NULL
 
-CREATE TABLE Floor (
-    ID INTEGER PRIMARY KEY,
-    Name VARCHAR2(30) NOT NULL
-);
+        CONSTRAINT FK_Person
+            FOREIGN KEY (ID)
+            REFERENCES Person(ID)
+    )
 
-CREATE TABLE Room (
-    ID INTEGER PRIMARY KEY,
-    FloorID INTEGER NOT NULL,
-    Capacity INTEGER NOT NULL
+    CREATE TABLE hospital.Floor (
+        ID INTEGER PRIMARY KEY,
+        Name VARCHAR2(30) NOT NULL
+    )
 
-    CONSTRAINT FK_Plant
-        FOREIGN KEY (FloorID)
-        REFERENCES Floor(ID)
-);
+    CREATE TABLE hospital.Room (
+        ID INTEGER PRIMARY KEY,
+        FloorID INTEGER NOT NULL,
+        Capacity INTEGER NOT NULL
 
-CREATE TABLE Hospitalization (
-    ID INTEGER PRIMARY KEY,
-    PatientID INTEGER NOT NULL,
-    RoomID INTEGER NOT NULL,
-    DerivedFromEmergencies NUMBER(1) NOT NULL,
-    AdmissionDate Date NOT NULL, 
-    DischargeDate Date
+        CONSTRAINT FK_Plant
+            FOREIGN KEY (FloorID)
+            REFERENCES Floor(ID)
+    )
 
-    CONSTRAINT FK_Patient
-        FOREIGN KEY (PatientID)
-        REFERENCES Patient(ID)
+    CREATE TABLE hospital.Hospitalization (
+        ID INTEGER PRIMARY KEY,
+        PatientID INTEGER NOT NULL,
+        RoomID INTEGER NOT NULL,
+        DerivedFromEmergencies NUMBER(1) NOT NULL,
+        AdmissionDate Date NOT NULL, 
+        DischargeDate Date
 
-    CONSTRAINT FK_Room
-        FOREIGN KEY (RoomID)
-        REFERENCES Room(ID)
-);
+        CONSTRAINT FK_Patient
+            FOREIGN KEY (PatientID)
+            REFERENCES Patient(ID)
 
-CREATE TABLE Observation (
-    ID INTEGER PRIMARY KEY,
-    NurseId INTEGER NOT NULL,
-    HospitalizationId INTEGER NOT NULL,
-    Description VARCHAR2(500) NOT NULL,
-    DateTime DATE NOT NULL
+        CONSTRAINT FK_Room
+            FOREIGN KEY (RoomID)
+            REFERENCES Room(ID)
+    )
 
-    CONSTRAINT FK_Nurse
-        FOREIGN KEY (NurseId)
-        REFERENCES Nurse(ID)
+    CREATE TABLE hospital.Observation (
+        ID INTEGER PRIMARY KEY,
+        NurseId INTEGER NOT NULL,
+        HospitalizationId INTEGER NOT NULL,
+        Description VARCHAR2(500) NOT NULL,
+        DateTime DATE NOT NULL
 
-    CONSTRAINT FK_Hospitalization
-        FOREIGN KEY (HospitalizationId)
-        REFERENCES Hospitalization(ID)
-);
+        CONSTRAINT FK_Nurse
+            FOREIGN KEY (NurseId)
+            REFERENCES Nurse(ID)
 
-CREATE TABLE Medicament (
-    ID INTEGER PRIMARY KEY,
-    Name VARCHAR2(30) NOT NULL,
-    CieCode VARCHAR2(30) NOT NULL
-);
+        CONSTRAINT FK_Hospitalization
+            FOREIGN KEY (HospitalizationId)
+            REFERENCES Hospitalization(ID)
+    )
 
-CREATE TABLE Patology (
-    ID INTEGER PRIMARY KEY,
-    MedicamentId INTEGER,
-    Name VARCHAR2(30) NOT NULL,
-    IsInfectious NUMBER(1) NOT NULL,
-    IsHereditary NUMBER(1) NOT NULL
+    CREATE TABLE hospital.Medicament (
+        ID INTEGER PRIMARY KEY,
+        Name VARCHAR2(30) NOT NULL,
+        CieCode VARCHAR2(30) NOT NULL
+    )
 
-    CONSTRAINT FK_Medicament
-        FOREIGN KEY (MedicamentId)
-        REFERENCES Medicament(ID)
-);
+    CREATE TABLE hospital.Patology (
+        ID INTEGER PRIMARY KEY,
+        MedicamentId INTEGER,
+        Name VARCHAR2(30) NOT NULL,
+        IsInfectious NUMBER(1) NOT NULL,
+        IsHereditary NUMBER(1) NOT NULL
 
-CREATE TABLE Patient_Patologies (
-    PatientId INTEGER PRIMARY KEY,
-    PatologyId INTEGER PRIMARY KEY
+        CONSTRAINT FK_Medicament
+            FOREIGN KEY (MedicamentId)
+            REFERENCES Medicament(ID)
+    )
 
-    CONSTRAINT FK_Patient
-        FOREIGN KEY (PatientId)
-        REFERENCES Patient(ID)
+    CREATE TABLE hospital.Patient_Patologies (
+        PatientId INTEGER PRIMARY KEY,
+        PatologyId INTEGER PRIMARY KEY
 
-    CONSTRAINT FK_Patology
-        FOREIGN KEY (PatologyId)
-        REFERENCES Patology(ID)
-);
+        CONSTRAINT FK_Patient
+            FOREIGN KEY (PatientId)
+            REFERENCES Patient(ID)
 
-CREATE TABLE Treatment (
-    ID INTEGER PRIMARY KEY,
-    DoctorId INTEGER NOT NULL,
-    HospitalizationId INTEGER NOT NULL,
-    MedicamentId INTEGER,
-    DateTime Date NOT NULL,
-    Description VARCHAR2(500) NOT NULL,
-    StartDate Date NOT NULL,
-    EndDate DATE NOT NULL
+        CONSTRAINT FK_Patology
+            FOREIGN KEY (PatologyId)
+            REFERENCES Patology(ID)
+    )
 
-    CONSTRAINT FK_Doctor
-        FOREIGN KEY (DoctorId)
-        REFERENCES Doctor(ID)
+    CREATE TABLE hospital.Treatment (
+        ID INTEGER PRIMARY KEY,
+        DoctorId INTEGER NOT NULL,
+        HospitalizationId INTEGER NOT NULL,
+        MedicamentId INTEGER,
+        DateTime Date NOT NULL,
+        Description VARCHAR2(500) NOT NULL,
+        StartDate Date NOT NULL,
+        EndDate DATE NOT NULL
 
-    CONSTRAINT FK_Medicament
-        FOREIGN KEY (MedicamentId)
-        REFERENCES Medicament(ID)
+        CONSTRAINT FK_Doctor
+            FOREIGN KEY (DoctorId)
+            REFERENCES Doctor(ID)
 
-    CONSTRAINT FK_Hospitalization
-        FOREIGN KEY (HospitalizationId)
-        REFERENCES Hospitalization(ID)
-);
+        CONSTRAINT FK_Medicament
+            FOREIGN KEY (MedicamentId)
+            REFERENCES Medicament(ID)
+
+        CONSTRAINT FK_Hospitalization
+            FOREIGN KEY (HospitalizationId)
+            REFERENCES Hospitalization(ID)
+    )
