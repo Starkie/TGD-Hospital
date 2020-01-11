@@ -13,11 +13,11 @@ CREATE SCHEMA AUTHORIZATION hospital
         FloorId INTEGER NOT NULL,
         WorksNightShift NUMBER(1) NOT NULL
 
-        CONSTRAINT FK_Person
+        CONSTRAINT FK_Employee_Person
             FOREIGN KEY (ID)
             REFERENCES Person(ID)
 
-        CONSTRAINT FK_Floor
+        CONSTRAINT FK_Employee_Floor
             FOREIGN KEY (FloorId)
             REFERENCES Floor(ID)
     )
@@ -26,7 +26,7 @@ CREATE SCHEMA AUTHORIZATION hospital
         ID INTEGER PRIMARY KEY,
         ColegiateNumber VARCHAR2(15) NOT NULL
 
-        CONSTRAINT FK_Employee
+        CONSTRAINT FK_Doctor_Employee
             FOREIGN KEY (ID)
             REFERENCES Employee(ID)
     )
@@ -35,7 +35,7 @@ CREATE SCHEMA AUTHORIZATION hospital
         ID INTEGER PRIMARY KEY,
         IsSupervisor NUMBER(1) NOT NULL
 
-        CONSTRAINT FK_Employee
+        CONSTRAINT FK_Nurse_Employee
             FOREIGN KEY (ID)
             REFERENCES Employee(ID)
     )
@@ -44,7 +44,7 @@ CREATE SCHEMA AUTHORIZATION hospital
         ID INTEGER PRIMARY KEY,
         SipNumber VARCHAR2(15) NOT NULL
 
-        CONSTRAINT FK_Person
+        CONSTRAINT FK_Patient_Person
             FOREIGN KEY (ID)
             REFERENCES Person(ID)
     )
@@ -59,7 +59,7 @@ CREATE SCHEMA AUTHORIZATION hospital
         FloorID INTEGER NOT NULL,
         Capacity INTEGER NOT NULL
 
-        CONSTRAINT FK_Plant
+        CONSTRAINT FK_Room_Floor
             FOREIGN KEY (FloorID)
             REFERENCES Floor(ID)
     )
@@ -72,11 +72,11 @@ CREATE SCHEMA AUTHORIZATION hospital
         AdmissionDate Date NOT NULL, 
         DischargeDate Date
 
-        CONSTRAINT FK_Patient
+        CONSTRAINT FK_Hospitalization_Patient
             FOREIGN KEY (PatientID)
             REFERENCES Patient(ID)
 
-        CONSTRAINT FK_Room
+        CONSTRAINT FK_Hospitalization_Room
             FOREIGN KEY (RoomID)
             REFERENCES Room(ID)
     )
@@ -88,11 +88,11 @@ CREATE SCHEMA AUTHORIZATION hospital
         Description VARCHAR2(500) NOT NULL,
         DateTime DATE NOT NULL
 
-        CONSTRAINT FK_Nurse
+        CONSTRAINT FK_Observation_Nurse
             FOREIGN KEY (NurseId)
             REFERENCES Nurse(ID)
 
-        CONSTRAINT FK_Hospitalization
+        CONSTRAINT FK_Observation_Hospitalization
             FOREIGN KEY (HospitalizationId)
             REFERENCES Hospitalization(ID)
     )
@@ -110,7 +110,7 @@ CREATE SCHEMA AUTHORIZATION hospital
         IsInfectious NUMBER(1) NOT NULL,
         IsHereditary NUMBER(1) NOT NULL
 
-        CONSTRAINT FK_Medicament
+        CONSTRAINT FK_Patology_Medicament
             FOREIGN KEY (MedicamentId)
             REFERENCES Medicament(ID)
     )
@@ -119,11 +119,11 @@ CREATE SCHEMA AUTHORIZATION hospital
         PatientId INTEGER PRIMARY KEY,
         PatologyId INTEGER PRIMARY KEY
 
-        CONSTRAINT FK_Patient
+        CONSTRAINT FK_PatientPatologies_Patient
             FOREIGN KEY (PatientId)
             REFERENCES Patient(ID)
 
-        CONSTRAINT FK_Patology
+        CONSTRAINT FK_PatientPatologies_Patology
             FOREIGN KEY (PatologyId)
             REFERENCES Patology(ID)
     )
@@ -138,15 +138,15 @@ CREATE SCHEMA AUTHORIZATION hospital
         StartDate Date NOT NULL,
         EndDate DATE NOT NULL
 
-        CONSTRAINT FK_Doctor
+        CONSTRAINT FK_Treatment_Doctor
             FOREIGN KEY (DoctorId)
             REFERENCES Doctor(ID)
 
-        CONSTRAINT FK_Medicament
+        CONSTRAINT FK_Treatment_Medicament
             FOREIGN KEY (MedicamentId)
             REFERENCES Medicament(ID)
 
-        CONSTRAINT FK_Hospitalization
+        CONSTRAINT FK_Treatment_Hospitalization
             FOREIGN KEY (HospitalizationId)
             REFERENCES Hospitalization(ID)
     )
