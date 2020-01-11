@@ -11,11 +11,11 @@ CREATE SCHEMA AUTHORIZATION hospital
     CREATE TABLE hospital.Employee (
         ID INTEGER PRIMARY KEY,
         FloorId INTEGER NOT NULL,
-        WorksNightShift NUMBER(1) NOT NULL
+        WorksNightShift NUMBER(1) NOT NULL,
 
         CONSTRAINT FK_Employee_Person
             FOREIGN KEY (ID)
-            REFERENCES Person(ID)
+            REFERENCES Person(ID),
 
         CONSTRAINT FK_Employee_Floor
             FOREIGN KEY (FloorId)
@@ -24,7 +24,7 @@ CREATE SCHEMA AUTHORIZATION hospital
 
     CREATE TABLE hospital.Doctor (
         ID INTEGER PRIMARY KEY,
-        ColegiateNumber VARCHAR2(15) NOT NULL
+        ColegiateNumber VARCHAR2(15) NOT NULL,
 
         CONSTRAINT FK_Doctor_Employee
             FOREIGN KEY (ID)
@@ -33,7 +33,7 @@ CREATE SCHEMA AUTHORIZATION hospital
 
     CREATE TABLE hospital.Nurse (
         ID INTEGER PRIMARY KEY,
-        IsSupervisor NUMBER(1) NOT NULL
+        IsSupervisor NUMBER(1) NOT NULL,
 
         CONSTRAINT FK_Nurse_Employee
             FOREIGN KEY (ID)
@@ -42,7 +42,7 @@ CREATE SCHEMA AUTHORIZATION hospital
 
     CREATE TABLE hospital.Patient (
         ID INTEGER PRIMARY KEY,
-        SipNumber VARCHAR2(15) NOT NULL
+        SipNumber VARCHAR2(15) NOT NULL,
 
         CONSTRAINT FK_Patient_Person
             FOREIGN KEY (ID)
@@ -57,7 +57,7 @@ CREATE SCHEMA AUTHORIZATION hospital
     CREATE TABLE hospital.Room (
         ID INTEGER PRIMARY KEY,
         FloorID INTEGER NOT NULL,
-        Capacity INTEGER NOT NULL
+        Capacity INTEGER NOT NULL,
 
         CONSTRAINT FK_Room_Floor
             FOREIGN KEY (FloorID)
@@ -70,11 +70,11 @@ CREATE SCHEMA AUTHORIZATION hospital
         RoomID INTEGER NOT NULL,
         DerivedFromEmergencies NUMBER(1) NOT NULL,
         AdmissionDate Date NOT NULL, 
-        DischargeDate Date
+        DischargeDate Date,
 
         CONSTRAINT FK_Hospitalization_Patient
             FOREIGN KEY (PatientID)
-            REFERENCES Patient(ID)
+            REFERENCES Patient(ID),
 
         CONSTRAINT FK_Hospitalization_Room
             FOREIGN KEY (RoomID)
@@ -86,11 +86,11 @@ CREATE SCHEMA AUTHORIZATION hospital
         NurseId INTEGER NOT NULL,
         HospitalizationId INTEGER NOT NULL,
         Description VARCHAR2(500) NOT NULL,
-        DateTime DATE NOT NULL
+        DateTime DATE NOT NULL,
 
         CONSTRAINT FK_Observation_Nurse
             FOREIGN KEY (NurseId)
-            REFERENCES Nurse(ID)
+            REFERENCES Nurse(ID),
 
         CONSTRAINT FK_Observation_Hospitalization
             FOREIGN KEY (HospitalizationId)
@@ -108,7 +108,7 @@ CREATE SCHEMA AUTHORIZATION hospital
         MedicamentId INTEGER,
         Name VARCHAR2(30) NOT NULL,
         IsInfectious NUMBER(1) NOT NULL,
-        IsHereditary NUMBER(1) NOT NULL
+        IsHereditary NUMBER(1) NOT NULL,
 
         CONSTRAINT FK_Patology_Medicament
             FOREIGN KEY (MedicamentId)
@@ -117,11 +117,11 @@ CREATE SCHEMA AUTHORIZATION hospital
 
     CREATE TABLE hospital.Patient_Patologies (
         PatientId INTEGER PRIMARY KEY,
-        PatologyId INTEGER PRIMARY KEY
+        PatologyId INTEGER PRIMARY KEY,
 
         CONSTRAINT FK_PatientPatologies_Patient
             FOREIGN KEY (PatientId)
-            REFERENCES Patient(ID)
+            REFERENCES Patient(ID),
 
         CONSTRAINT FK_PatientPatologies_Patology
             FOREIGN KEY (PatologyId)
@@ -136,15 +136,15 @@ CREATE SCHEMA AUTHORIZATION hospital
         DateTime Date NOT NULL,
         Description VARCHAR2(500) NOT NULL,
         StartDate Date NOT NULL,
-        EndDate DATE NOT NULL
+        EndDate DATE NOT NULL,
 
         CONSTRAINT FK_Treatment_Doctor
             FOREIGN KEY (DoctorId)
-            REFERENCES Doctor(ID)
+            REFERENCES Doctor(ID),
 
         CONSTRAINT FK_Treatment_Medicament
             FOREIGN KEY (MedicamentId)
-            REFERENCES Medicament(ID)
+            REFERENCES Medicament(ID),
 
         CONSTRAINT FK_Treatment_Hospitalization
             FOREIGN KEY (HospitalizationId)
