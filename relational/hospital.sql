@@ -1,7 +1,7 @@
 CREATE SCHEMA AUTHORIZATION hospital
 
     CREATE TABLE hospital.Person (
-        ID INTEGER PRIMARY KEY, 
+        ID NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1, 
         DNI VARCHAR2(12) NOT NULL,
         Name VARCHAR2(25) NOT NULL,
         FirstSurname VARCHAR2(25) NOT NULL,
@@ -50,12 +50,12 @@ CREATE SCHEMA AUTHORIZATION hospital
     )
 
     CREATE TABLE hospital.Floor (
-        ID INTEGER PRIMARY KEY,
+        ID NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1,
         Name VARCHAR2(30) NOT NULL
     )
 
     CREATE TABLE hospital.Room (
-        ID INTEGER PRIMARY KEY,
+        ID NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1,
         FloorID INTEGER NOT NULL,
         Capacity INTEGER NOT NULL,
 
@@ -65,7 +65,7 @@ CREATE SCHEMA AUTHORIZATION hospital
     )
 
     CREATE TABLE hospital.Hospitalization (
-        ID INTEGER PRIMARY KEY,
+        ID NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1,
         PatientID INTEGER NOT NULL,
         RoomID INTEGER NOT NULL,
         DerivedFromEmergencies NUMBER(1) NOT NULL,
@@ -82,7 +82,7 @@ CREATE SCHEMA AUTHORIZATION hospital
     )
 
     CREATE TABLE hospital.Observation (
-        ID INTEGER PRIMARY KEY,
+        ID NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1,
         NurseId INTEGER NOT NULL,
         HospitalizationId INTEGER NOT NULL,
         Description VARCHAR2(500) NOT NULL,
@@ -98,13 +98,13 @@ CREATE SCHEMA AUTHORIZATION hospital
     )
 
     CREATE TABLE hospital.Medicament (
-        ID INTEGER PRIMARY KEY,
+        ID NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1,
         Name VARCHAR2(30) NOT NULL,
         CieCode VARCHAR2(30) NOT NULL
     )
 
     CREATE TABLE hospital.Patology (
-        ID INTEGER PRIMARY KEY,
+        ID NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1,
         MedicamentId INTEGER,
         Name VARCHAR2(30) NOT NULL,
         IsInfectious NUMBER(1) NOT NULL,
@@ -132,7 +132,7 @@ CREATE SCHEMA AUTHORIZATION hospital
     )
 
     CREATE TABLE hospital.Treatment (
-        ID INTEGER PRIMARY KEY,
+        ID NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1,
         DoctorId INTEGER NOT NULL,
         HospitalizationId INTEGER NOT NULL,
         MedicamentId INTEGER,
