@@ -66,7 +66,7 @@ CREATE TABLE Hospitalization (
     derivedFromEmergencies BOOLEAN,
     admissionDate TIMESTAMP, 
     dischargeDate TIMESTAMP,
-    observations SET<Observation>,
+    observations SET<FROZEN<Observation>>,
 
     PRIMARY KEY(patientId, roomId)
 );
