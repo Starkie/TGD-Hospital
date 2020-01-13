@@ -3,15 +3,19 @@ CREATE KEYSPACE IF NOT EXISTS hospitaldb with replication= {'class':'SimpleStrat
 
 use hospitaldb;
 
-CREATE TABLE Doctor (
-    id TIMEUUID PRIMARY KEY,
-    floorId TIMEUUID,
+CREATE TYPE PersonInfo (
     dni TEXT,
     name TEXT,
     firstSurname TEXT,
     secondSurname TEXT,
     address TEXT,
-    phoneNumber TEXT,
+    phoneNumber TEXT
+);
+
+CREATE TABLE Doctor (
+    id TIMEUUID PRIMARY KEY,
+    personInformation FROZEN<PersonInfo>,
+    floorId TIMEUUID,
     worksNightShift BOOLEAN, 
     isActive BOOLEAN,
     colegiateNumber TEXT
@@ -19,13 +23,8 @@ CREATE TABLE Doctor (
 
 CREATE TABLE Nurse (
     id TIMEUUID PRIMARY KEY,
+    personInformation FROZEN<PersonInfo>,
     floorId TIMEUUID,
-    dni TEXT,
-    name TEXT,
-    firstSurname TEXT,
-    secondSurname TEXT,
-    address TEXT,
-    phoneNumber TEXT,
     worksNightShift BOOLEAN, 
     isActive BOOLEAN,
     isSupervisor BOOLEAN
@@ -33,13 +32,8 @@ CREATE TABLE Nurse (
 
 CREATE TABLE Patient (
     id TIMEUUID PRIMARY KEY,
+    personInformation FROZEN<PersonInfo>,
     floorId TIMEUUID,
-    dni TEXT,
-    name TEXT,
-    firstSurname TEXT,
-    secondSurname TEXT,
-    address TEXT,
-    phoneNumber TEXT,
     sipNumber TEXT
 );
 
