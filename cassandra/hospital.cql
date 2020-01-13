@@ -47,7 +47,6 @@ CREATE TABLE Floor (
 
 CREATE TYPE Observation (
     nurseId TIMEUUID,
-    hospitalizationId TIMEUUID,
     description TEXT,
     date TIMESTAMP
 );
