@@ -49,9 +49,7 @@ CREATE TYPE Observation (
     nurseId TIMEUUID,
     hospitalizationId TIMEUUID,
     description TEXT,
-    date TIMESTAMP,
-
-    PRIMARY KEY(nurseId, hospitalizationId)
+    date TIMESTAMP
 );
 
 CREATE TABLE Hospitalization (
