@@ -37,12 +37,15 @@ CREATE TABLE Patient (
     sipNumber TEXT
 );
 
+CREATE TYPE Room (
+    id TIMEUUID,
+    capacity INT
+);
+
 CREATE TABLE Floor (
     id timeuuid PRIMARY KEY,
     name TEXT,
-    -- TODO: Discuss if this is the correct approach to define the Room entity.
-    -- Should a type be defined instead?
-    rooms MAP<TIMEUUID, INT>
+    rooms SET<FROZEN<Room>>
 );
 
 -- TODO: Model Patient - Patologies relation.
