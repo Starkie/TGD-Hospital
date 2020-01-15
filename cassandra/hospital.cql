@@ -68,6 +68,15 @@ CREATE TYPE Observation (
     date TIMESTAMP
 );
 
+CREATE TYPE Treatment (
+    doctorId TIMEUUID,
+    medicamentId TIMEUUID,
+    description TEXT,
+    date TIMESTAMP,
+    startDate TIMESTAMP,
+    endDate TIMESTAMP
+);
+
 CREATE TABLE Hospitalization (
     patientId TIMEUUID,
     roomId TIMEUUID,
@@ -75,6 +84,7 @@ CREATE TABLE Hospitalization (
     admissionDate TIMESTAMP, 
     dischargeDate TIMESTAMP,
     observations SET<FROZEN<Observation>>,
+    treatments SET<FROZEN<Treatment>>,
 
     PRIMARY KEY(patientId, roomId)
 );
