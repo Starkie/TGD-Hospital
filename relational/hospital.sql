@@ -5,13 +5,16 @@ CREATE SCHEMA AUTHORIZATION hospital
         DNI VARCHAR2(12) NOT NULL,
         Name VARCHAR2(25) NOT NULL,
         FirstSurname VARCHAR2(25) NOT NULL,
-        SecondSurname VARCHAR2(25)
+        SecondSurname VARCHAR2(25),
+        Address VARCHAR2(75) NOT NULL,
+        Telephone VARCHAR2(15) NOT NULL,
     )
 
     CREATE TABLE hospital.Employee (
         ID INTEGER PRIMARY KEY,
         FloorId INTEGER NOT NULL,
         WorksNightShift NUMBER(1) NOT NULL,
+        IsActive NUMBER(1) NOT NULL,
 
         CONSTRAINT FK_Employee_Person
             FOREIGN KEY (ID)
@@ -86,7 +89,7 @@ CREATE SCHEMA AUTHORIZATION hospital
         NurseId INTEGER NOT NULL,
         HospitalizationId INTEGER NOT NULL,
         Description VARCHAR2(500) NOT NULL,
-        DateTime DATE NOT NULL,
+        CreationDate DATE NOT NULL,
 
         CONSTRAINT FK_Observation_Nurse
             FOREIGN KEY (NurseId)
@@ -100,7 +103,8 @@ CREATE SCHEMA AUTHORIZATION hospital
     CREATE TABLE hospital.Medicament (
         ID NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1,
         Name VARCHAR2(30) NOT NULL,
-        CieCode VARCHAR2(30) NOT NULL
+        Provider VARCHAR2(50) NOT NULL,
+        AdministrationRoute VARCHAR2(20) NOT NULL
     )
 
     CREATE TABLE hospital.Patology (
@@ -109,6 +113,7 @@ CREATE SCHEMA AUTHORIZATION hospital
         Name VARCHAR2(30) NOT NULL,
         IsInfectious NUMBER(1) NOT NULL,
         IsHereditary NUMBER(1) NOT NULL,
+        CieCode VARCHAR2(3) NOT NULL,
 
         CONSTRAINT FK_Patology_Medicament
             FOREIGN KEY (MedicamentId)
@@ -136,7 +141,7 @@ CREATE SCHEMA AUTHORIZATION hospital
         DoctorId INTEGER NOT NULL,
         HospitalizationId INTEGER NOT NULL,
         MedicamentId INTEGER,
-        DateTime Date NOT NULL,
+        CreationDate Date NOT NULL,
         Description VARCHAR2(500) NOT NULL,
         StartDate Date NOT NULL,
         EndDate DATE NOT NULL,
