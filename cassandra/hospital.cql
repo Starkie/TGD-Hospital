@@ -59,7 +59,7 @@ CREATE TABLE Patology (
 );
 
 CREATE TABLE Medicine (
-    id TIMEUUID,
+    id TIMEUUID PRIMARY KEY,
     name TEXT,
     provider TEXT,
     administrationRoute TEXT
