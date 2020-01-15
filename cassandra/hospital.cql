@@ -34,7 +34,8 @@ CREATE TABLE Patient (
     id TIMEUUID PRIMARY KEY,
     personInformation FROZEN<PersonInfo>,
     floorId TIMEUUID,
-    sipNumber TEXT
+    sipNumber TEXT,
+    patologies MAP<TIMEUUID, TEXT>
 );
 
 CREATE TYPE Room (
@@ -48,7 +49,6 @@ CREATE TABLE Floor (
     rooms SET<FROZEN<Room>>
 );
 
--- TODO: Model Patient - Patologies relation.
 CREATE TABLE Patology (
     id TIMEUUID PRIMARY KEY,
     medicamentId TIMEUUID,
