@@ -68,14 +68,14 @@ CREATE TABLE Medicine (
 CREATE TYPE Observation (
     nurseId TIMEUUID,
     description TEXT,
-    date TIMESTAMP
+    creationDate TIMESTAMP
 );
 
 CREATE TYPE Treatment (
     doctorId TIMEUUID,
     medicamentId TIMEUUID,
     description TEXT,
-    date TIMESTAMP,
+    creationDate TIMESTAMP,
     startDate TIMESTAMP,
     endDate TIMESTAMP
 );
