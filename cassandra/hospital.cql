@@ -45,6 +45,23 @@ CREATE TABLE Floor (
     rooms MAP<TIMEUUID, INT>
 );
 
+-- TODO: Model Patient - Patologies relation.
+CREATE TABLE Patology (
+    id TIMEUUID PRIMARY KEY,
+    medicamentId TIMEUUID,
+    name TEXT,
+    isInfectious BOOLEAN,
+    isHereditary BOOLEAN,
+    cieCode TEXT
+);
+
+CREATE TABLE Medicine (
+    id TIMEUUID,
+    name TEXT,
+    provider TEXT,
+    administrationRoute TEXT
+);
+
 CREATE TYPE Observation (
     nurseId TIMEUUID,
     description TEXT,
