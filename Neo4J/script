@@ -63,19 +63,19 @@ match (p:Planta {id:4}), (h:Habitacion {id:5}) create (h)-[r:Ubicada_en]->(p)
 
 # Creación de Médicos
 
-create (medico1:Medico {id: 1, dni: "11234481P", nombre: "Eugenio", primerApellido: "Pérez", segundoApellido: "Ramiro", direccion: "Av. del Puerto", telefono: "629355672", esTurnoNoche: false, numeroColegiado: "22565678" })
+create (medico1:Medico {id: 1, dni: "11234481P", nombre: "Eugenio", primerApellido: "Pérez", segundoApellido: "Ramiro", direccion: "Av. del Puerto", telefono: "629355672", esTurnoNoche: false, numeroColegiado: "22565678", activo:true })
 
-create (medico2:Medico {id: 2, dni: "31531491R", nombre: "Marta", primerApellido: "Espinosa", segundoApellido: "Esteve", direccion: "C. de Alfonso Santillana", telefono: "625315262", esTurnoNoche: false, numeroColegiado: "21525598" })
+create (medico2:Medico {id: 2, dni: "31531491R", nombre: "Marta", primerApellido: "Espinosa", segundoApellido: "Esteve", direccion: "C. de Alfonso Santillana", telefono: "625315262", esTurnoNoche: false, numeroColegiado: "21525598", activo:true })
 
 # Creación de Enfermeras
 
-create (enfermera1:Enfermera {id: 1, dni: "66231181D", nombre: "Antonio", primerApellido: "Roca", segundoApellido: "Salazedo", direccion: "C. de los Reyes Católicos", telefono: "623325862", esTurnoNoche: true, esSupervisora: false })
+create (enfermera1:Enfermera {id: 1, dni: "66231181D", nombre: "Antonio", primerApellido: "Roca", segundoApellido: "Salazedo", direccion: "C. de los Reyes Católicos", telefono: "623325862", esTurnoNoche: true, esSupervisora: false, activo:true })
 
-create (enfermera2:Enfermera {id: 2, dni: "23241597B", nombre: "Laura", primerApellido: "Sánchez", segundoApellido: "Martí", direccion: "C. Pompeya", telefono: "614385902", esTurnoNoche: false, esSupervisora: true })
+create (enfermera2:Enfermera {id: 2, dni: "23241597B", nombre: "Laura", primerApellido: "Sánchez", segundoApellido: "Martí", direccion: "C. Pompeya", telefono: "614385902", esTurnoNoche: false, esSupervisora: true, activo:false })
 
-create (enfermera3:Enfermera {id: 3, dni: "27221891H", nombre: "Amalia", primerApellido: "Amor", segundoApellido: "Sevilla", direccion: "C. de la Paz", telefono: "613357002", esTurnoNoche: false, esSupervisora: false })
+create (enfermera3:Enfermera {id: 3, dni: "27221891H", nombre: "Amalia", primerApellido: "Amor", segundoApellido: "Sevilla", direccion: "C. de la Paz", telefono: "613357002", esTurnoNoche: false, esSupervisora: false, activo:true })
 
-create (enfermera4:Enfermera {id: 4, dni: "26243871G", nombre: "Pilar", primerApellido: "Perpiñá", segundoApellido: "Alfreda", direccion: "C. Catalunya", telefono: "658957309", esTurnoNoche: false, esSupervisora: false })
+create (enfermera4:Enfermera {id: 4, dni: "26243871G", nombre: "Pilar", primerApellido: "Perpiñá", segundoApellido: "Alfreda", direccion: "C. Catalunya", telefono: "658957309", esTurnoNoche: false, esSupervisora: false, activo:true })
 
 # Vinculaciones entre Empleados y Plantas
 match (p:Planta {id:1}), (m:Medico {id:1}) create (m)-[r:Trabaja_en]->(p)
