@@ -131,6 +131,7 @@ match (ho:Hospitalizacion {id:1}), (t:Tratamiento {id:1}) create (t)-[r:Pautado_
 match (ho:Hospitalizacion {id:1}), (t:Tratamiento {id:2}) create (t)-[r:Pautado_en]->(ho)
 match (ho:Hospitalizacion {id:2}), (t:Tratamiento {id:3}) create (t)-[r:Pautado_en]->(ho)
 match (ho:Hospitalizacion {id:3}), (t:Tratamiento {id:4}) create (t)-[r:Pautado_en]->(ho)
+match (ho:Hospitalizacion {id:3}), (t:Tratamiento {id:5}) create (t)-[r:Pautado_en]->(ho)
 
 # Vinculaciones entre Hospitalizaciones y Seguimientos
 match (ho:Hospitalizacion {id:3}), (s:Seguimiento {id:1}) create (s)-[r:Realizado_en]->(ho)
