@@ -159,4 +159,4 @@ match (m:Medicamento {id:5}), (t:Tratamiento {id:4}) create (t) - [r:se_Pauta] -
 # Vinculaciones entre Pacientes y Patologías
 match (pac:Paciente {id:3}), (pat:Patologia {id:2}) create (pac) - [r:Sufre_de] -> (pat)
 match (pac:Paciente {id:4}), (pat:Patologia {id:2}) create (pac) - [r:Sufre_de] -> (pat)
-match (pac:Paciente {id:4}), (pat:Patologia {id:2}) create (pac) - [r:Sufre_de] -> (pat)
+match (pac:Paciente {id:4}), (pat:Patologia {id:5}) create (pac) - [r:Sufre_de] -> (pat)
