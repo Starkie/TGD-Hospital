@@ -95,18 +95,22 @@ create (hospitalizacion3:Hospitalizacion {id: 3, fechaAlta: "2018-01-23T11:20:00
 
 create (hospitalizacion4:Hospitalizacion {id: 4, fechaAlta: "2018-08-21T21:20:00", fechaBaja:"2018-08-22T09:45:40", procedeUrgencias: false })
 
+create (hospitalizacion5:Hospitalizacion {id: 5, fechaAlta: "2016-05-27T19:10:00", fechaBaja:"2016-05-27T21:10:00", procedeUrgencias: false })
+
 # Vinculaciones entre Hospitalizaciones y Pacientes
 
 match (p:Paciente {id:1}), (h:Hospitalizacion {id:1}) create (h)-[r:Ingreso_de]->(p)
 match (p:Paciente {id:2}), (h:Hospitalizacion {id:2}) create (h)-[r:Ingreso_de]->(p)
 match (p:Paciente {id:3}), (h:Hospitalizacion {id:3}) create (h)-[r:Ingreso_de]->(p)
 match (p:Paciente {id:4}), (h:Hospitalizacion {id:4}) create (h)-[r:Ingreso_de]->(p)
+match (p:Paciente {id:3}), (h:Hospitalizacion {id:5}) create (h)-[r:Ingreso_de]->(p)
 
 # Vinculaciones entre Hospitalizaciones y Habitaciones
 match (ho:Hospitalizacion {id:1}), (h:Habitacion {id:4}) create (ho)-[r:Estancia_en]->(h)
 match (ho:Hospitalizacion {id:2}), (h:Habitacion {id:4}) create (ho)-[r:Estancia_en]->(h)
 match (ho:Hospitalizacion {id:3}), (h:Habitacion {id:1}) create (ho)-[r:Estancia_en]->(h)
 match (ho:Hospitalizacion {id:4}), (h:Habitacion {id:2}) create (ho)-[r:Estancia_en]->(h)
+match (ho:Hospitalizacion {id:5}), (h:Habitacion {id:3}) create (ho)-[r:Estancia_en]->(h)
 
 # Creación de Tratamientos
 create (tratamiento1:Tratamiento {id: 1, fechaCreacion: "2019-08-01T12:00:00", descripcion: "Paciente con síntomas de Neumonía. Se le recomienda tomar antibióticos durante una semana, haciendo 2 tomas diarias. Permanecerá hospitalizado al menos 2 días. Presenta tos seca y febrícula.", fechaInicio: "2019-08-01T12:00:00", fechaFin: "2019-08-08T12:00:00" })
