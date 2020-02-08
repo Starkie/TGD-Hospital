@@ -113,7 +113,7 @@ CREATE SCHEMA AUTHORIZATION hospital
         Name VARCHAR2(30) NOT NULL,
         IsInfectious NUMBER(1) NOT NULL,
         IsHereditary NUMBER(1) NOT NULL,
-        CieCode VARCHAR2(3) NOT NULL,
+        CieCode VARCHAR2(6) NOT NULL,
 
         CONSTRAINT FK_Patology_Medicament
             FOREIGN KEY (MedicamentId)
