@@ -33,7 +33,6 @@ CREATE TABLE Nurse (
 CREATE TABLE Patient (
     id TIMEUUID PRIMARY KEY,
     personInformation FROZEN<PersonInfo>,
-    floorId TIMEUUID,
     sipNumber TEXT,
     patologies MAP<TIMEUUID, TEXT>
 );
